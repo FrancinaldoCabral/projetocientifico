@@ -11,7 +11,7 @@ public class ControleEstatistica {
 	private ManipuladorXLSX planilhas;
 	
 	@RequestMapping("/")
-	public EstatisticasCriminais getHomicidio(@RequestParam(value="crime")String crime){
+	public EstatisticasCriminais getEstatistica(@RequestParam(value="crime")String crime){
 			
 		planilhas = new ManipuladorXLSX(crime);
 		return planilhas.getEstatisticasCriminais();
