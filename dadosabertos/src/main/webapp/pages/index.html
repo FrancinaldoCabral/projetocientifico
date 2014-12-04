@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="app">
+    <head>
+        <title>Estatisticas Criminais no Brasil</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/angular.js"></script>
+        <script type="text/javascript" src="/js/highcharts.js"></script>
+    	<script type="text/javascript" src="/js/exporting.js"></script>
+        <script type="text/javascript" src="/js/ControllerEstatistica.js"></script>
+        <link rel="stylesheet" src="/css/bootstrap.css"/>
+           
+        
+    </head>
+    <body ng-controller="MyController">
+    	
+    	<div style="background-color:rgb(255,140,0)"><table ><tr><td>
+    	<select ng-model="crimeSelecionado">
+    		<option value="crimeNaoSelecionado" selected="selected">Selecione um crime</option>
+    		<option value="homicidio">Homicidio</option>
+    		<option value="furtodeveiculo">Furto de Veículo</option>
+    		<option value="estupro">Estupro</option>
+    		<option value="rouboveiculo">Roubo de Veículo</option>
+    		<option value="latrocinio">Latrocínio</option>
+    		<option value="lesaocorporalseguidodemorte">Lesão corporal seguida de morte</option>    		
+    	</select>
+    	<input type="button" value="Exibir Estatística" ng-click="atualizaTudo()"></td>
+    		
+    	</tr>
+    	<tr>
+    		<td style="padding-left:10px">{{descricaoCrime.descricao}}</td>
+    	</tr></table></div>
+    	
+    	<div id="divGrafico" style="height:3000px; width:auto"></div>
+    	        
+        
+    </body>
+</html>
