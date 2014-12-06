@@ -7,12 +7,15 @@ app.controller('MyController', function($scope, $http){
     		nome:'',
     		descricao:''
     }
-    
-    $scope.listaEstados= new Array();
-    $scope.taxasPorAno={
-    		listaAnos: new Array([], [], [], [])
-       		
+
+    var init = function(){ 
+	    $scope.listaEstados= new Array();
+	    $scope.taxasPorAno={
+	    		listaAnos: new Array([], [], [], [])
+	       		
+	    };
     }
+    init();
         
 	var charts = function(){ new Highcharts.Chart({
     	
@@ -93,6 +96,7 @@ app.controller('MyController', function($scope, $http){
     	selectCrime();
     	atualizaDescriçãoCrime();
         atualizaDados();
+        
     }
     
     var selectCrime = function(){
@@ -131,52 +135,35 @@ app.controller('MyController', function($scope, $http){
     	}
     	
     }
-    /*
-    var zerarDados = function(){
-    	
-    	while($scope.listaEstados.lenght){
-    		$scope.listaEstados.pop();
-    		console.log('zerar estados');
-
-    	}
-    	
-    	while($scope.taxasPorAno.listaAnos[0].lenght){
-    		$scope.taxasPorAno.listaAnos[0].pop;
-    	}
-    	
-    	while($scope.taxasPorAno.listaAnos[1].lenght){
-    		$scope.taxasPorAno.listaAnos[1].pop;
-    	}
-    	
-    	while($scope.taxasPorAno.listaAnos[2].lenght){
-    		$scope.taxasPorAno.listaAnos[2].pop;
-    	}
-    	
-    	while($scope.taxasPorAno.listaAnos[3].lenght){
-    		$scope.taxasPorAno.listaAnos[3].pop;
-    	}
-    }
-*/    
+    // $http.get().then( function() { } ) 
     var atualizaDados = function(){
         $http.get('/', config).success(function(estatistica){
-        	var i;
-        	console.log('atualiza dados');
-        	var j=0;
-            for(i=0; i<estatistica.estados.length;i++){
-            	$scope.listaEstados[i]=estatistica.estados[i].nome;
-            	var x;
-            	for(x=0;x<estatistica.estados[i].anos.length;x++){
-            		$scope.taxasPorAno.listaAnos[x][j]=estatistica.estados[i].anos[x].taxa;
-            		
-            	}
-            	j++;
-            }
-            charts();    
-            
+        	$scope.estatistica = estatistica;
+        	console.log('atualiza dados: VAI ENTRAR NO ATUALIZA GRAFICO AGORA');
+        	$scope.atualizaGrafico($scope.estatistica.estados);	
         }).error(function(){
             alert("ERRO NA BUSCA DOS DADOS");
         });
-    };
+       
+    };   	
+    
+    $scope.atualizaGrafico = function(estados){
+    	    init();
+        	var i;
+        	console.log('atualiza grafico');
+        	var j=0;
+            for(i=0; i< estados.length;i++){
+            	console.log(estados[i].nome) 
+            	$scope.listaEstados[i]=estados[i].nome;
+            	var x;
+            	for(x=0;x<estados[i].anos.length;x++){
+            		$scope.taxasPorAno.listaAnos[x][j]=estados[i].anos[x].taxa;            		
+            	}
+            	j++;
+            }
+            
+            charts();  
+         };
     
     
     

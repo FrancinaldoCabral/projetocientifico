@@ -13,14 +13,16 @@ and open the template in the editor.
         <script type="text/javascript" src="/js/angular.js"></script>
         <script type="text/javascript" src="/js/highcharts.js"></script>
     	<script type="text/javascript" src="/js/exporting.js"></script>
-        <script type="text/javascript" src="/js/ControllerEstatistica.js"></script>
-        <link rel="stylesheet" src="/css/bootstrap.css"/>
+        <link rel="stylesheet" href="/css/bootstrap.css"/>
            
         
     </head>
     <body ng-controller="MyController">
+	<script type="text/javascript" src="/js/ControllerEstatistica.js"></script>
+    
+    <div class="jumbotron"><div class="container"><h1>Estatisticas Criminais</h1></div></div>
     	
-    	<div style="background-color:rgb(255,140,0)"><table ><tr><td>
+    	<div  class="panel-body" style="background-color:rgb(255,140,0); padding-left:5px"><table ><tr><td>
     	<select ng-model="crimeSelecionado">
     		<option value="crimeNaoSelecionado" selected="selected">Selecione um crime</option>
     		<option value="homicidio">Homicidio</option>
@@ -30,15 +32,18 @@ and open the template in the editor.
     		<option value="latrocinio">Latrocínio</option>
     		<option value="lesaocorporalseguidodemorte">Lesão corporal seguida de morte</option>    		
     	</select>
-    	<input type="button" value="Exibir Estatística" ng-click="atualizaTudo()"></td>
-    		
-    	</tr>
-    	<tr>
-    		<td style="padding-left:10px">{{descricaoCrime.descricao}}</td>
-    	</tr></table></div>
     	
-    	<div id="divGrafico" style="height:3000px; width:auto"></div>
+    	<input type="button" value="Exibir Estatística" ng-click="atualizaTudo()">
+
+    	<input type="text" ng-model="criterio"  />  
+    	<input type="button" value="refresh" ng-click="atualizaGrafico( (estatistica.estados | filter: criterio)  )"/>	</td>
+    	</tr>
+    	</table></div>
+    	<br>
+    	{{ (estatistica.estados | filter: criterio).length * 300}}
+    	<div style="padding-left:10px; font-size:15px">{{descricaoCrime.descricao}}</div><br><br>
+    	<div id="divGrafico" style="height:{{(estatistica.estados | filter: criterio).length * 300+('px')}}; width:auto"></div>
     	        
-        
+		        
     </body>
 </html>
