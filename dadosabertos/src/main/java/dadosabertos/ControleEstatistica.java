@@ -10,7 +10,7 @@ public class ControleEstatistica {
 	
 	private ManipuladorXLSX planilhas;
 	
-	@RequestMapping("/")
+	@RequestMapping("/dados")
 	public EstatisticasCriminais getEstatistica(@RequestParam(value="crime")String crime){
 			
 		planilhas = new ManipuladorXLSX(crime);

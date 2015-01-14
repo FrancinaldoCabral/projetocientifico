@@ -137,7 +137,7 @@ app.controller('MyController', function($scope, $http){
     }
     // $http.get().then( function() { } ) 
     var atualizaDados = function(){
-        $http.get('/', config).success(function(estatistica){
+        $http.get('/dados', config).success(function(estatistica){
         	$scope.estatistica = estatistica;
         	console.log('atualiza dados: VAI ENTRAR NO ATUALIZA GRAFICO AGORA');
         	$scope.atualizaGrafico($scope.estatistica.estados);	

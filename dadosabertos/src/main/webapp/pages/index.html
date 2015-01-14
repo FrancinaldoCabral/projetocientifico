@@ -39,8 +39,6 @@ and open the template in the editor.
     	<input type="button" value="refresh" ng-click="atualizaGrafico( (estatistica.estados | filter: criterio)  )"/>	</td>
     	</tr>
     	</table></div>
-    	<br>
-    	{{ (estatistica.estados | filter: criterio).length * 300}}
     	<div style="padding-left:10px; font-size:15px">{{descricaoCrime.descricao}}</div><br><br>
     	<div id="divGrafico" style="height:{{(estatistica.estados | filter: criterio).length * 300+('px')}}; width:auto"></div>
     	        
